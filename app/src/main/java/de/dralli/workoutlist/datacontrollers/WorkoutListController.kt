@@ -1,0 +1,66 @@
+package de.dralli.workoutlist.datacontrollers
+
+import android.content.SharedPreferences
+import com.google.gson.Gson
+import com.google.gson.internal.LinkedTreeMap
+import de.dralli.workoutlist.dataobjects.WorkoutList
+import java.util.function.Consumer
+
+class WorkoutListController private constructor(var sharedPreferences: SharedPreferences) {
+    private val sharedPreferencesKey = "data.workoutLists"
+    private lateinit var workoutLists: ArrayList<WorkoutList>
+
+    init {
+        load()
+    }
+
+    public companion object{
+        private var instance: WorkoutListController? = null
+        fun getInstance(): WorkoutListController?{
+            return instance
+        }
+
+        fun getInstance(sharedPreferences: SharedPreferences): WorkoutListController {
+            if (instance == null) {
+                instance = WorkoutListController(sharedPreferences)
+            }
+            return instance as WorkoutListController
+        }
+    }
+
+    public fun getWorkoutLists(): ArrayList<WorkoutList>{
+        return workoutLists
+    }
+
+    public fun addWorkoutList(workoutList: WorkoutList){
+        workoutLists.add(workoutList)
+        save()
+    }
+
+    public fun changeWorkoutList(position: Int, workoutList: WorkoutList){
+        workoutLists.set(position, workoutList)
+        save()
+    }
+
+    public fun deleteWorkoutList(position: Int){
+        workoutLists.removeAt(position)
+        save()
+    }
+
+
+    fun load(){
+        workoutLists = ArrayList()
+        val gson = Gson()
+        if(sharedPreferences.contains(sharedPreferencesKey)){
+            gson.fromJson(sharedPreferences.getString(sharedPreferencesKey, ""), ArrayList<LinkedTreeMap<String, Any>>().javaClass).forEach(
+                Consumer {
+                    workoutLists.add(WorkoutList(it as LinkedTreeMap<String, Any>))
+                }
+            )
+        }
+    }
+
+    fun save(){
+        sharedPreferences.edit().putString(sharedPreferencesKey, Gson().toJson(workoutLists, workoutLists.javaClass)).apply()
+    }
+}

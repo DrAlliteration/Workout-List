@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="de.dralli.workoutlist.FirstFragment"
+        android:name="de.dralli.workoutlist.WorkoutOverviewFragment"
         android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
+        tools:layout="@layout/fragment_workout_overview">
 
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
