@@ -2,12 +2,14 @@ package de.dralli.workoutlist.listadapters
 
 import android.app.AlertDialog
 import android.content.Context
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.Button
 import android.widget.TextView
+import androidx.navigation.findNavController
 import com.google.android.material.snackbar.Snackbar
 import de.dralli.workoutlist.R
 import de.dralli.workoutlist.datacontrollers.WorkoutListController
@@ -41,10 +43,7 @@ class WorkoutListAdapter(private val context: Context, private val arrayList: ja
         deleteButton = convertView.findViewById(R.id.workout_list_delete_button)
         launchButton = convertView.findViewById(R.id.workout_list_launch_button)
         name.text = arrayList[position].title
-        editButton.setOnClickListener { view ->
-            // Edit Page öffnen
 
-        }
         deleteButton.setOnClickListener { view ->
             val builder = AlertDialog.Builder(convertView.context!!)
             builder.setMessage("Möchtest du das Workout "+name.text+ " wirklich löschen?")
@@ -62,10 +61,18 @@ class WorkoutListAdapter(private val context: Context, private val arrayList: ja
             builder.create().show()
         }
 
+        editButton.setOnClickListener { view ->
+            // Edit Page öffnen
+            val parameters = Bundle()
+            parameters.putInt("WorkoutListIndex", position)
+            view.findNavController().navigate(R.id.SecondFragment, parameters)
+        }
+
         launchButton.setOnClickListener { view ->
             // Workout Starten
-            Snackbar.make(view, "Launch für die Position: $position", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+            val parameters = Bundle()
+            parameters.putInt("WorkoutListIndex", position)
+            view.findNavController().navigate(R.id.SecondFragment, parameters)
         }
 
         return convertView

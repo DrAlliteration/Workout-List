@@ -14,7 +14,7 @@ class WorkoutListController private constructor(var sharedPreferences: SharedPre
         load()
     }
 
-    public companion object{
+    companion object{
         private var instance: WorkoutListController? = null
         fun getInstance(): WorkoutListController?{
             return instance
@@ -28,21 +28,21 @@ class WorkoutListController private constructor(var sharedPreferences: SharedPre
         }
     }
 
-    public fun getWorkoutLists(): ArrayList<WorkoutList>{
+    fun getWorkoutLists(): ArrayList<WorkoutList>{
         return workoutLists
     }
 
-    public fun addWorkoutList(workoutList: WorkoutList){
+    fun addWorkoutList(workoutList: WorkoutList){
         workoutLists.add(workoutList)
         save()
     }
 
-    public fun changeWorkoutList(position: Int, workoutList: WorkoutList){
-        workoutLists.set(position, workoutList)
+    fun changeWorkoutList(position: Int, workoutList: WorkoutList){
+        workoutLists[position] = workoutList
         save()
     }
 
-    public fun deleteWorkoutList(position: Int){
+    fun deleteWorkoutList(position: Int){
         workoutLists.removeAt(position)
         save()
     }
