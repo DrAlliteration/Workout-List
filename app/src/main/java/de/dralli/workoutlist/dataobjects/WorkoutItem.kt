@@ -10,10 +10,10 @@ data class WorkoutItem(
 ) {
     constructor(attributes: Map<String, Any>) : this(null, null, null, null, null, false){
         name = attributes.get("name") as String?
-        minReps = attributes.get("minReps") as Int?
-        maxReps = attributes.get("maxReps") as Int?
-        sets = attributes.get("sets") as Int?
-        weight = attributes.get("weight") as Int?
+        minReps = (attributes.get("minReps") as Double?)?.toInt()
+        maxReps = (attributes.get("maxReps") as Double?)?.toInt()
+        sets = (attributes.get("sets") as Double?)?.toInt()
+        weight = (attributes.get("weight") as Double?)?.toInt()
         done = false
     }
 }

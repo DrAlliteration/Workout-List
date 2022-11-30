@@ -47,6 +47,12 @@ class WorkoutListController private constructor(var sharedPreferences: SharedPre
         save()
     }
 
+    fun getWorkoutList(position: Int?): WorkoutList? {
+        if(position == null)
+            return null
+        return workoutLists[position]
+    }
+
 
     fun load(){
         workoutLists = ArrayList()
