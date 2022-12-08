@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.WorkoutOverviewFragment">
+    tools:context=".fragments.WorkoutItemViewFragment">
 
     <ListView
-        android:id="@+id/workout_list"
+        android:id="@+id/workout_items"
         android:layout_width="407dp"
         android:layout_height="682dp"
         android:layout_marginStart="1dp"

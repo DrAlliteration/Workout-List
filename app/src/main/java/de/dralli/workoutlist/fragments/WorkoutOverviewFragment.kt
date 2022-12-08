@@ -1,4 +1,4 @@
-package de.dralli.workoutlist
+package de.dralli.workoutlist.fragments
 
 import android.content.Context.MODE_PRIVATE
 import android.os.Bundle
@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ListView
 import androidx.fragment.app.Fragment
+import de.dralli.workoutlist.R
 import de.dralli.workoutlist.databinding.FragmentWorkoutOverviewBinding
 import de.dralli.workoutlist.datacontrollers.WorkoutListController
 import de.dralli.workoutlist.listadapters.WorkoutListAdapter
