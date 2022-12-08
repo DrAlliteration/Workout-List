@@ -3,26 +3,36 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/WorkoutOverviewFragment">
 
     <fragment
-        android:id="@+id/FirstFragment"
-        android:name="de.dralli.workoutlist.WorkoutOverviewFragment"
+        android:id="@+id/WorkoutOverviewFragment"
+        android:name="de.dralli.workoutlist.fragments.WorkoutOverviewFragment"
         android:label="@string/first_fragment_label"
         tools:layout="@layout/fragment_workout_overview">
 
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            app:destination="@id/WorkoutItemViewFragment" />
     </fragment>
     <fragment
-        android:id="@+id/SecondFragment"
-        android:name="de.dralli.workoutlist.SecondFragment"
+        android:id="@+id/WorkoutItemViewFragment"
+        android:name="de.dralli.workoutlist.fragments.WorkoutItemViewFragment"
         android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
+        tools:layout="@layout/fragment_workoutitem_view">
 
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+            app:destination="@id/WorkoutOverviewFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/WorkoutItemEditFragment"
+        android:name="de.dralli.workoutlist.fragments.WorkoutItemEditFragment"
+        android:label="@string/second_fragment_label"
+        tools:layout="@layout/fragment_workoutitem_edit">
+
+        <action
+            android:id="@+id/action_SecondFragment_to_FirstFragment"
+            app:destination="@id/WorkoutOverviewFragment" />
     </fragment>
 </navigation>

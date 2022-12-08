@@ -1,26 +1,29 @@
-package de.dralli.workoutlist
+package de.dralli.workoutlist.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ListView
 import androidx.fragment.app.Fragment
-import de.dralli.workoutlist.databinding.FragmentSecondBinding
+import de.dralli.workoutlist.R
+import de.dralli.workoutlist.databinding.FragmentWorkoutitemEditBinding
 import de.dralli.workoutlist.datacontrollers.WorkoutListController
-import de.dralli.workoutlist.dataobjects.WorkoutItem
 import de.dralli.workoutlist.dataobjects.WorkoutList
-import de.dralli.workoutlist.listadapters.WorkoutItemAdapter
+import de.dralli.workoutlist.listadapters.WorkoutItemAdapterEdit
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
  */
-class SecondFragment : Fragment() {
+class WorkoutItemEditFragment : Fragment() {
 
-    private var _binding: FragmentSecondBinding? = null
+    private var _binding: FragmentWorkoutitemEditBinding? = null
     private lateinit var listView : ListView
     var workoutListController: WorkoutListController? = null
     var workoutList: WorkoutList? = null
+    lateinit var addButton: Button
+    lateinit var saveButton: Button
 
 
     // This property is only valid between onCreateView and
@@ -34,7 +37,7 @@ class SecondFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        _binding = FragmentSecondBinding.inflate(inflater, container, false)
+        _binding = FragmentWorkoutitemEditBinding.inflate(inflater, container, false)
         initWorkoutList(this.arguments)
         return binding.root
     }
@@ -42,6 +45,15 @@ class SecondFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         listView = view.findViewById(R.id.workout_items)
+        addButton = view.findViewById(R.id.addItemButton)
+        addButton.setOnClickListener{
+            TODO("Implementieren")
+        }
+
+        saveButton = view.findViewById(R.id.saveButton)
+        saveButton.setOnClickListener {
+            saveList()
+        }
         renderList()
     }
 
@@ -51,6 +63,11 @@ class SecondFragment : Fragment() {
     }
 
     private fun renderList(){
-        listView.adapter = WorkoutItemAdapter(listView.context, workoutList?.workoutItems ?: ArrayList<WorkoutItem>())
+        listView.adapter = WorkoutItemAdapterEdit(listView.context, workoutList!!)
+    }
+
+
+    private fun saveList(){
+        WorkoutListController.getInstance()?.save()
     }
 }

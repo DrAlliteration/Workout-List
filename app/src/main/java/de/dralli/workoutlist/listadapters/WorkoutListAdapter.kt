@@ -65,14 +65,14 @@ class WorkoutListAdapter(private val context: Context, private val arrayList: ja
             // Edit Page öffnen
             val parameters = Bundle()
             parameters.putInt("WorkoutListIndex", position)
-            view.findNavController().navigate(R.id.SecondFragment, parameters)
+            view.findNavController().navigate(R.id.WorkoutItemEditFragment, parameters)
         }
 
         launchButton.setOnClickListener { view ->
             // Workout Starten
             val parameters = Bundle()
             parameters.putInt("WorkoutListIndex", position)
-            view.findNavController().navigate(R.id.SecondFragment, parameters)
+            view.findNavController().navigate(R.id.WorkoutItemViewFragment, parameters)
         }
 
         return convertView
